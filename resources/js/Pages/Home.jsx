@@ -1,4 +1,21 @@
+import PostBox from "../Components/PostBox"
+
 export default function Home() {
+    const posts = [
+        {
+            title: 'Title Post One!',
+            description: `A short excerpt or summary of the blog post goes here. It's designed to attract the reader's`,
+        },
+        {
+            title: 'Title Post Two!',
+            description: `A short excerpt or summary of the blog post goes here. It's designed to attract the reader's`,
+        },
+        {
+            title: 'Title Post Three!',
+            description: `A short excerpt or summary of the blog post goes here. It's designed to attract the reader's`,
+        },
+    ]
+
     return (
         <div>
             <section className="relative text-gray-800 py-24">
@@ -17,40 +34,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id="latest-posts" className="bg-white text-gray-800 py-20 border-t border-gray-200">
-                <div className="max-w-6xl mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-10 text-center">Latest Posts</h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="border border-gray-300 p-6 shadow-sm hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-2">Post Title One</h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                A short excerpt or summary of the blog post goes here. It's designed to attract the reader's
-                                attention.
-                            </p>
-                            <a href="" className="text-blue-600 hover:underline text-sm">Read more →</a>
-                        </div>
-
-                        <div className="border border-gray-300 p-6 shadow-sm hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-2">Post Title Two</h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                A short excerpt or summary of the blog post goes here. It's designed to attract the reader's
-                                attention.
-                            </p>
-                            <a href="" className="text-blue-600 hover:underline text-sm">Read more →</a>
-                        </div>
-
-                        <div className="border border-gray-300 p-6 shadow-sm hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-2">Post Title Three</h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                A short excerpt or summary of the blog post goes here. It's designed to attract the reader's
-                                attention.
-                            </p>
-                            <a href="" className="text-blue-600 hover:underline text-sm">Read more →</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <PostBox title="Latest Posts" id="latest-posts" posts={posts} />
         </div>
     )
 }

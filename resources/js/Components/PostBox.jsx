@@ -11,7 +11,7 @@ export default function PostBox({ title = 'Posts', id = '', posts = [] }) {
                             <p className="text-sm text-gray-600 mb-4">
                                 {post.description}
                             </p>
-                            <a href="" className="text-blue-600 hover:underline text-sm">Read more →</a>
+                            <a href="" className="text-[var(--primary-color)] hover:underline text-sm">Read more →</a>
                         </div>
                     ))}
                 </div>

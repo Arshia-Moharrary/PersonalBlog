@@ -8,7 +8,7 @@ export default function Sidebar() {
                 <Link href={route('admin.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.index') ? 'text-primary' : ''}`}>
                     <Home size={18} /> Dashboard
                 </Link>
-                <Link href="/admin/users" className="flex items-center gap-2 hover:text-primary transition">
+                <Link href={route('admin.users.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.users.index') ? 'text-primary' : ''}`}>
                     <Users size={18} /> Users
                 </Link>
                 <Link href="/admin/settings" className="flex items-center gap-2 hover:text-primary transition">

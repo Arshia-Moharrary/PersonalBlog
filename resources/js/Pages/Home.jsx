@@ -1,5 +1,6 @@
 import PostBox from "../Components/PostBox"
 import Hero from "../Components/Hero"
+import AppLayout from "@/Layouts/AppLayout"
 
 export default function Home() {
     const posts = [
@@ -18,10 +19,10 @@ export default function Home() {
     ]
 
     return (
-        <div>
+        <AppLayout>
             <Hero />
 
             <PostBox title="Latest Posts" id="latest-posts" posts={posts} />
-        </div>
+        </AppLayout>
     )
 }

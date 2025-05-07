@@ -10,7 +10,7 @@ export default function Hero() {
                 <p className="text-lg sm:text-xl mb-6 leading-8">
                     A space where I share my thoughts, experiences, and more.<br /> Join me on this journey!
                 </p>
-                <a href="#latest-posts" className="btn-primary">
+                <a href="#latest-posts" className="btn-primary py-3 px-6 text-lg py-3 px-6 text-lg">
                     Read Latest Posts
                 </a>
             </div>

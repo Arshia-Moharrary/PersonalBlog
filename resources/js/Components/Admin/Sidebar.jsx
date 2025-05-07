@@ -5,7 +5,7 @@ export default function Sidebar() {
     return (
         <aside className="w-64 bg-white shadow-md px-6 py-8 hidden sm:block">
             <nav className="space-y-4 text-sm text-gray-700">
-                <Link href="/admin" className="flex items-center gap-2 hover:text-primary transition">
+                <Link href={route('admin.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.index') ? 'text-primary' : ''}`}>
                     <Home size={18} /> Dashboard
                 </Link>
                 <Link href="/admin/users" className="flex items-center gap-2 hover:text-primary transition">
@@ -15,7 +15,7 @@ export default function Sidebar() {
                     <Settings size={18} /> Settings
                 </Link>
                 <hr />
-                <Link href={route('logout')} method="post" as="button" className="flex items-center gap-2 text-red-500 hover:underline">
+                <Link href={route('logout')} className="flex items-center gap-2 text-red-500 hover:underline">
                     <LogOut size={18} /> Logout
                 </Link>
             </nav>

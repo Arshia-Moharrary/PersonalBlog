@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
-export default function Header({ auth }) {
+export default function Header({ auth, isAdmin }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -48,7 +48,12 @@ export default function Header({ auth }) {
 
                             {isOpen && (
                                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md z-10">
-                                    <Link href={route('logout')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">Logout</Link>
+                                    <>
+                                        {isAdmin && (
+                                            <Link href="" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">Admin Panel</Link>
+                                        )}
+                                        <Link href={route('logout')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">Logout</Link>
+                                    </>
                                 </div>
                             )}
                         </div>
@@ -74,11 +79,24 @@ export default function Header({ auth }) {
                     <a href="" className="hover:text-primary transition">Contact</a>
                     <hr />
                     {auth.user ? (
-                        <Link href="#" className="hover:text-primary transition">Dashboard</Link>
+                        <>
+                            {isAdmin && (
+                                <Link href="" className="hover:text-primary transition">
+                                    Admin Panel
+                                </Link>
+                            )}
+                            <Link href="/dashboard" className="hover:text-primary transition">
+                                Dashboard
+                            </Link>
+                        </>
                     ) : (
                         <>
-                            <Link href={route('login')} className="hover:text-primary transition">Login</Link>
-                            <Link href={route('register')} className="hover:text-primary transition">Register</Link>
+                            <Link href={route('login')} className="hover:text-primary transition">
+                                Login
+                            </Link>
+                            <Link href={route('register')} className="hover:text-primary transition">
+                                Register
+                            </Link>
                         </>
                     )}
                 </div>

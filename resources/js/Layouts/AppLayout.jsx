@@ -3,11 +3,11 @@ import Header from "../Components/Header";
 import { usePage } from "@inertiajs/react";
 
 export default function AppLayout({ children }) {
-    const { auth } = usePage().props;
+    const { auth, isAdmin } = usePage().props;
 
     return (
         <div>
-            <Header auth={auth} />
+            <Header auth={auth} isAdmin={isAdmin} />
             
             {children}
 

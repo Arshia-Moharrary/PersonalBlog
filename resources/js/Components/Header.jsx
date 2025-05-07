@@ -1,9 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
 export default function Header({ auth }) {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const toggleDropdown = () => setIsOpen(prev => !prev);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     return (
         <header className="bg-white shadow-sm">
@@ -21,7 +35,23 @@ export default function Header({ auth }) {
 
                 {auth.user ? (
                     <div className="hidden sm:flex space-x-4 items-center text-sm">
-                        <Link href={route('home')} className="bg-primary text-white px-4 py-1.5 rounded hover:opacity-90 transition">Dashboard</Link>
+                        <div className="relative inline-block text-left" ref={dropdownRef}>
+                            <button
+                                onClick={toggleDropdown}
+                                className="inline-flex items-center space-x-2 text-sm text-gray-700 hover:text-primary transition"
+                            >
+                                <span>Arshia</span>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            {isOpen && (
+                                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md z-10">
+                                    <Link href={route('logout')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">Logout</Link>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 ) : (
                     <div className="hidden sm:flex space-x-4 items-center text-sm">

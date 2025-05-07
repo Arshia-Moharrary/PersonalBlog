@@ -1,6 +1,7 @@
 import PostBox from "../Components/PostBox"
 import Hero from "../Components/Hero"
 import AppLayout from "@/Layouts/AppLayout"
+import { Head } from "@inertiajs/react"
 
 export default function Home() {
     const posts = [
@@ -20,6 +21,7 @@ export default function Home() {
 
     return (
         <AppLayout>
+            <Head title="Home" />
             <Hero />
 
             <PostBox title="Latest Posts" id="latest-posts" posts={posts} />

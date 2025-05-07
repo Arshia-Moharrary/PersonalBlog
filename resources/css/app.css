@@ -11,9 +11,9 @@
 }
 
 .btn-primary {
-    @apply bg-primary hover:bg-transparent border-2 border-primary hover:text-primary text-white transition;
+    @apply bg-primary text-center hover:bg-transparent border-2 border-primary hover:text-primary text-white transition;
 }
 
 .btn-secondary {
-    @apply hover:bg-primary bg-transparent border-2 border-primary text-primary hover:text-white transition;
+    @apply hover:bg-primary text-center bg-transparent border-2 border-primary text-primary hover:text-white transition;
 }

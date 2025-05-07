@@ -6,12 +6,12 @@ export default function PostBox({ title = 'Posts', id = '', posts = [] }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {posts.map((post, index) => (
-                        <div key={index} className="border border-gray-300 hover:border-[var(--primary-color)] cursor-pointer p-6 shadow-sm hover:shadow-md transition">
+                        <div key={index} className="border border-gray-300 hover:border-primary cursor-pointer p-6 shadow-sm hover:shadow-md transition">
                             <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                             <p className="text-sm text-gray-600 mb-4">
                                 {post.description}
                             </p>
-                            <a href="" className="text-[var(--primary-color)] hover:underline text-sm">Read more →</a>
+                            <a href="" className="text-primary hover:underline text-sm">Read more →</a>
                         </div>
                     ))}
                 </div>

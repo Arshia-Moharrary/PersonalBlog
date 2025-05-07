@@ -7,3 +7,5 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 require __DIR__.'/auth.php';
+
+require __DIR__.'/admin.php';

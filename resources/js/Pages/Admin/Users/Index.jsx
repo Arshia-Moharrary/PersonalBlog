@@ -52,6 +52,7 @@ export default function Index({ users }) {
                             <th className="px-4 py-2 border-b">ID</th>
                             <th className="px-4 py-2 border-b">Name</th>
                             <th className="px-4 py-2 border-b">Email</th>
+                            <th className="px-4 py-2 border-b">Member Since</th>
                             <th className="px-4 py-2 border-b">Actions</th>
                         </tr>
                     </thead>
@@ -61,6 +62,7 @@ export default function Index({ users }) {
                                 <td className="px-4 py-2">{user.id}</td>
                                 <td className="px-4 py-2">{user.name}</td>
                                 <td className="px-4 py-2">{user.email}</td>
+                                <td className="px-4 py-2">{user.joined_at}</td>
                                 <td className="px-4 py-2 flex gap-2">
                                     <Link href={route('admin.users.edit', user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
                                         <Pencil size={14} /> Edit

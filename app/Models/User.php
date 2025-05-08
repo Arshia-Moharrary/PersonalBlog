@@ -35,6 +35,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [
+        'joined_at',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -51,5 +55,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    public function getJoinedAtAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 }

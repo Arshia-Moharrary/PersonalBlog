@@ -36,6 +36,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'isAdmin' => Gate::allows('is_admin'),
+            'flash' => fn() => [
+                'success' => session('success'),
+                'error' => session('error'),
+            ],
         ];
     }
 }

@@ -48,9 +48,9 @@ export default function Index({ users }) {
                                 <td className="px-4 py-2">{user.name}</td>
                                 <td className="px-4 py-2">{user.email}</td>
                                 <td className="px-4 py-2 flex gap-2">
-                                    <button className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
+                                    <Link href={route('admin.users.edit', user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
                                         <Pencil size={14} /> Edit
-                                    </button>
+                                    </Link>
                                     <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:underline flex items-center gap-1 text-xs">
                                         <Trash2 size={14} /> Delete
                                     </button>

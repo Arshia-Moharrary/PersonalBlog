@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Link } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Index({ users }) {
     const [userList, setUserList] = useState(users);
     const [showModal, setShowModal] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
+    const { delete: destroy } = useForm();
+    const { flash } = usePage().props;
 
     const handleDelete = (id) => {
         setUserToDelete(id);
@@ -14,13 +16,25 @@ export default function Index({ users }) {
     };
 
     const confirmDelete = () => {
-        setUserList(userList.filter(user => user.id !== userToDelete));
-        setShowModal(false);
+        destroy(route('admin.users.destroy', userToDelete), {
+            preserveScroll: true,
+        });
     };
 
     const cancelDelete = () => {
         setShowModal(false);
     };
+
+    useEffect(() => {
+        if (flash.success) {
+            setUserList(userList.filter(user => user.id !== userToDelete));
+        }
+
+        if (flash.success || flash.error) {
+            setShowModal(false);
+        }
+    }, [flash]);
+
 
     return (
         <AdminLayout>

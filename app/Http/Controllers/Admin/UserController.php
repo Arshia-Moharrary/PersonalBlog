@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Illuminate\Validation\Rules;
@@ -35,7 +36,9 @@ class UserController extends Controller
             'password' => Hash::make($request->string('password')),
         ]);
 
-        return Inertia::location(route('admin.users.index'));
+        return to_route('admin.users.index')->with('success', __('success.create', [
+            'attribute' => 'User'
+        ]));
     }
 
     public function edit(User $user)
@@ -61,6 +64,25 @@ class UserController extends Controller
         return back()->with('success', __('success.update', [
             'attribute' => 'User'
         ]));
+    }
+
+    public function destroy(User $user, Request $request)
+    {
+        if ($user->id == $request->user()->id) {
+            return redirect()->back()->with('error', 'Sorry, you can\'t delete your own account while you\'re signed in.');
+        }
+
+        try {
+            $user->delete();
+
+            return redirect()->back()->with('success', __('success.delete', [
+                'attribute' => 'User'
+            ]));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('error.delete', [
+                'attribute' => 'user'
+            ]));
+        }
     }
 
     private function validateStore(Request $request)

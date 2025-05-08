@@ -36,7 +36,7 @@ export default function Alert({ type, message, duration = 3000, onClose }) {
                         setShow(false)
                         onClose?.()
                     }}
-                    className={`fixed top-6 right-6 z-50 border-l-4 p-4 rounded-xl shadow-md cursor-pointer w-[300px] ${colors[type]}`}
+                    className={`fixed top-6 right-6 z-50 border-l-4 p-4 rounded-xl shadow-md cursor-pointer ${colors[type]}`}
                 >
                     <div className="flex items-start gap-3">
                         {icons[type]}

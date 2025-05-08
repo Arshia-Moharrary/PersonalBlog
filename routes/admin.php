@@ -10,5 +10,7 @@ Route::prefix('admin')->name('admin.')->middleware(AdminMiddleware::class)->grou
 
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('create', [UserController::class, 'store'])->name('store');
     });
 });

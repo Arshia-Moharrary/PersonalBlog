@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
+import { Link } from '@inertiajs/react';
 
 export default function Index({ users }) {
     const [userList, setUserList] = useState(users);
@@ -25,9 +26,9 @@ export default function Index({ users }) {
         <AdminLayout>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-xl font-semibold">Users</h1>
-                <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm rounded hover:opacity-90 transition">
+                <Link href={route('admin.users.create')} as="button" className="flex items-center gap-2 px-4 py-2 btn-primary">
                     <Plus size={16} /> Add User
-                </button>
+                </Link>
             </div>
 
             <div className="overflow-x-auto">
@@ -67,7 +68,6 @@ export default function Index({ users }) {
                 </table>
             </div>
 
-            {/* Modal for delete confirmation */}
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-6 w-1/3 max-w-sm shadow-xl transform transition-all">

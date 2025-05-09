@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import Header from '@/Components/Admin/Index/Header';
 
 export default function Index({ users }) {
     const [userList, setUserList] = useState(users);
@@ -9,6 +10,14 @@ export default function Index({ users }) {
     const [userToDelete, setUserToDelete] = useState(null);
     const { delete: destroy } = useForm();
     const { flash } = usePage().props;
+    const settings = {
+        route: 'users',
+        model: 'User',
+        models: 'Users',
+        hasAdd: true,
+        hasEdit: true,
+        hasDelete: true,
+    };
 
     const handleDelete = (id) => {
         setUserToDelete(id);
@@ -16,7 +25,7 @@ export default function Index({ users }) {
     };
 
     const confirmDelete = () => {
-        destroy(route('admin.users.destroy', userToDelete), {
+        destroy(route(`admin.${settings.route}.destroy`, userToDelete), {
             preserveScroll: true,
         });
     };
@@ -38,14 +47,9 @@ export default function Index({ users }) {
 
     return (
         <AdminLayout>
-            <Head title="Users" />
-            
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-xl font-semibold">Users</h1>
-                <Link href={route('admin.users.create')} as="button" className="flex items-center gap-2 px-4 py-2 btn-primary">
-                    <Plus size={16} /> Add User
-                </Link>
-            </div>
+            <Head title={settings.models} />
+
+            <Header title={settings.models} button={settings.hasAdd ? `Add ${settings.model}` : false} routeName={`admin.${settings.route}.create`} />
 
             <div className="overflow-x-auto">
                 <table className="w-full text-sm border border-gray-200">
@@ -66,19 +70,23 @@ export default function Index({ users }) {
                                 <td className="px-4 py-2">{user.email}</td>
                                 <td className="px-4 py-2">{user.joined_at}</td>
                                 <td className="px-4 py-2 flex gap-2">
-                                    <Link href={route('admin.users.edit', user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
-                                        <Pencil size={14} /> Edit
-                                    </Link>
-                                    <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:underline flex items-center gap-1 text-xs">
-                                        <Trash2 size={14} /> Delete
-                                    </button>
+                                    {settings.hasEdit && (
+                                        <Link href={route(`admin.${settings.route}.edit`, user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
+                                            <Pencil size={14} /> Edit
+                                        </Link>
+                                    )}
+                                    {settings.hasDelete && (
+                                        <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:underline flex items-center gap-1 text-xs">
+                                            <Trash2 size={14} /> Delete
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}
                         {userList.length === 0 && (
                             <tr>
                                 <td colSpan="4" className="px-4 py-4 text-center text-gray-500">
-                                    No users found.
+                                    No {settings.model.charAt(0).toLowerCase() + settings.model.slice(1)} found.
                                 </td>
                             </tr>
                         )}
@@ -90,7 +98,7 @@ export default function Index({ users }) {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-6 w-1/3 max-w-sm shadow-xl transform transition-all">
                         <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
-                        <p className="text-sm mb-4 text-gray-600">Are you sure you want to delete this user?<br /> This action cannot be undone.</p>
+                        <p className="text-sm mb-4 text-gray-600">Are you sure you want to delete this record?<br /> This action cannot be undone.</p>
                         <div className="flex justify-between">
                             <button
                                 onClick={confirmDelete}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Index({ users }) {
     const [userList, setUserList] = useState(users);
@@ -38,6 +38,8 @@ export default function Index({ users }) {
 
     return (
         <AdminLayout>
+            <Head title="Users" />
+            
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-xl font-semibold">Users</h1>
                 <Link href={route('admin.users.create')} as="button" className="flex items-center gap-2 px-4 py-2 btn-primary">

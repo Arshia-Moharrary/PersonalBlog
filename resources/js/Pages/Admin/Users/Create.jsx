@@ -1,5 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, Link } from '@inertiajs/react';
+import { useForm, Link, Head } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
@@ -19,6 +19,8 @@ export default function Create() {
 
     return (
         <AdminLayout>
+            <Head title="Add User" />
+
             <h1 className="text-2xl font-semibold mb-6">Add New User</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mt-4">

@@ -57,7 +57,7 @@ class CategoryController extends Controller
         ]));
     }
 
-    public function destroy(Category $category, Request $request)
+    public function destroy(Category $category)
     {
         try {
             $category->delete();

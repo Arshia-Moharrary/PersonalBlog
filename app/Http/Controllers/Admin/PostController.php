@@ -70,6 +70,21 @@ class PostController extends Controller
         ]));
     }
 
+    public function destroy(Post $post)
+    {
+        try {
+            $post->delete();
+
+            return back()->with('success', __('success.delete', [
+                'attribute' => 'Post'
+            ]));
+        } catch (\Exception $e) {
+            return back()->with('error', __('error.delete', [
+                'attribute' => 'post'
+            ]));
+        }
+    }
+
     private function validateStore(Request $request)
     {
         return $request->validate([

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Eye, Pencil, Trash2 } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import Header from '@/Components/Admin/Index/Header';
@@ -17,6 +17,7 @@ export default function Index({ users }) {
         hasAdd: true,
         hasEdit: true,
         hasDelete: true,
+        hasShow: false,
     };
 
     const handleDelete = (id) => {
@@ -73,6 +74,11 @@ export default function Index({ users }) {
                                     {settings.hasEdit && (
                                         <Link href={route(`admin.${settings.route}.edit`, user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
                                             <Pencil size={14} /> Edit
+                                        </Link>
+                                    )}
+                                    {settings.hasShow && (
+                                        <Link href={route(`admin.${settings.route}.show`, user.id)} as="button" className="text-green-600 hover:underline flex items-center gap-1 text-xs">
+                                            <Eye size={14} /> Show
                                         </Link>
                                     )}
                                     {settings.hasDelete && (

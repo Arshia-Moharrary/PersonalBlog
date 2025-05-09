@@ -32,13 +32,11 @@ class PostController extends Controller
     {
         $this->validateStore($request);
 
-        $tags = $this->getTagsInArray($request->tags);
-
         $request->user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
             'category_id' => $request->category_id,
-            'tags' => $tags,
+            'tags' => $request->tags,
         ]);
 
         return to_route('admin.posts.index')->with('success', __('success.create', [
@@ -46,17 +44,30 @@ class PostController extends Controller
         ]));
     }
 
-    private function getTagsInArray($tags)
+    public function edit(Post $post)
     {
-        $array = json_decode($tags, true);
+        $categories = Category::all();
 
-        $result = [];
+        return Inertia::render('Admin/Posts/Edit', [
+            'post' => $post,
+            'categories' => $categories
+        ]);
+    }
+    
+    public function update(Post $post, Request $request)
+    {
+        $this->validateStore($request);
 
-        foreach ($array as $tag) {
-            $result[] = $tag['value'];
-        }
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->category_id = $request->category_id;
+        $post->tags = $request->tags;
 
-        return $result;
+        $post->save();
+
+        return back()->with('success', __('success.update', [
+            'attribute' => 'Post'
+        ]));
     }
 
     private function validateStore(Request $request)

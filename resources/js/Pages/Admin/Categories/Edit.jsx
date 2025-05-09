@@ -7,9 +7,6 @@ import InputLabel from '@/Components/InputLabel';
 export default function Edit({ category }) {
     const { data, setData, put, processing, errors } = useForm({
         name: category.name,
-        email: category.email,
-        password: '',
-        password_confirmation: '',
     });
 
     const handleSubmit = (e) => {

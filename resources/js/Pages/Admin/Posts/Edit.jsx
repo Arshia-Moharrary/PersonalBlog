@@ -3,18 +3,32 @@ import { useForm, Link, Head } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
+import ReactQuill from 'react-quill';
+import "react-quill/dist/quill.snow.css";
+import Tags from '@yaireo/tagify/react'
+import '@yaireo/tagify/dist/tagify.css'
 
-export default function Edit({ category }) {
+export default function Edit({ post, categories }) {
     const { data, setData, put, processing, errors } = useForm({
-        name: category.name,
-        email: category.email,
-        password: '',
-        password_confirmation: '',
+        title: post.title,
+        body: post.body,
+        category_id: post.category_id,
+        tags: post.tags,
     });
+
+    const modules = {
+        toolbar: [
+            [{ header: [1, 2, 3, false] }],
+            ["bold", "italic", "underline", "strike"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link"],
+            ["clean"],
+        ],
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route('admin.categories.update', category.id), data);
+        put(route('admin.posts.update', post.id), data);
     };
 
     return (
@@ -24,24 +38,79 @@ export default function Edit({ category }) {
             <h1 className="text-2xl font-semibold mb-6">Add New Category</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mt-4">
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="title" value="Title" />
 
                     <TextInput
-                        id="name"
+                        id="title"
                         type="text"
-                        name="name"
-                        value={data.name}
+                        name="title"
+                        value={data.title}
                         className="mt-1 block w-full"
-                        onChange={(e) => setData('name', e.target.value)}
-                        placeholder="Enter category name"
+                        onChange={(e) => setData('title', e.target.value)}
+                        placeholder="Enter post title"
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.title} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel value="Content" />
+
+                    <ReactQuill
+                        theme="snow"
+                        value={data.body}
+                        onChange={(value) => setData('body', value)}
+                        placeholder="Type post content ..."
+                        modules={modules}
+                        className="mt-1 editor"
+                    />
+
+                    <InputError message={errors.body} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="category_id" value="Category" />
+
+                    <select
+                        id="category_id"
+                        name="category_id"
+                        value={data.category_id}
+                        onChange={(e) => setData('category_id', e.target.value)}
+                        className="px-3 py-2 mt-1 border-gray-300 block w-full focus:outline-none focus:ring-primary focus:border-primary transition bg-white"
+                    >
+                        <option value="" selected disabled>Choose category ...</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+
+                    <InputError message={errors.category_id} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel value="Tags" />
+
+                    <Tags
+                        placeholder='Add some tags'
+                        settings={{
+                            maxTags: 30,
+                            dropdown: {
+                                enabled: 0
+                            }
+                        }}
+                        className="block w-full"
+                        onChange={(e) => setData('tags', e.detail.value)}
+                        value={data.tags}
+                    />
+
+                    <InputError message={errors.tags} className="mt-2" />
                 </div>
 
                 <div className="flex justify-end gap-4 mt-4">
                     <Link
-                        href={route('admin.categories.index')}
+                        href={route('admin.posts.index')}
                         as="button"
                         className="btn-secondary px-4 py-2">
                         Cancel

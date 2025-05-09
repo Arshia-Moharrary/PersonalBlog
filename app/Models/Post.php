@@ -12,6 +12,8 @@ class Post extends Model
         'tags' => 'array',
     ];
 
+    protected $appends = ['tags_in_json'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -20,5 +22,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getTagsInJsonAttribute()
+    {
+        return json_encode($this->tags);
     }
 }

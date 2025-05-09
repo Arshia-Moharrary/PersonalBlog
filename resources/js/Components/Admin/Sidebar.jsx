@@ -1,4 +1,4 @@
-import { LogOut, Home, Users, Settings } from 'lucide-react';
+import { LogOut, Home, Users, Tags } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
 export default function Sidebar() {
@@ -11,8 +11,8 @@ export default function Sidebar() {
                 <Link href={route('admin.users.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.users.index') || route().current('admin.users.create') || route().current('admin.users.edit') ? 'text-primary' : ''}`}>
                     <Users size={18} /> Users
                 </Link>
-                <Link href="/admin/settings" className="flex items-center gap-2 hover:text-primary transition">
-                    <Settings size={18} /> Settings
+                <Link href={route('admin.categories.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.categories.index') /*|| route().current('admin.categories.create') || route().current('admin.categories.edit')*/ ? 'text-primary' : ''}`}>
+                    <Tags size={18} /> Categories
                 </Link>
                 <hr />
                 <Link href={route('logout')} className="flex items-center gap-2 text-red-500 hover:underline">

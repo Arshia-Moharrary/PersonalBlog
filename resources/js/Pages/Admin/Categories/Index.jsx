@@ -4,28 +4,28 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import Header from '@/Components/Admin/Index/Header';
 
-export default function Index({ users }) {
-    const [userList, setUserList] = useState(users);
+export default function Index({ categories }) {
+    const [categoryList, setCategoryList] = useState(categories);
     const [showModal, setShowModal] = useState(false);
-    const [userToDelete, setUserToDelete] = useState(null);
+    const [categoryToDelete, setCategoryToDelete] = useState(null);
     const { delete: destroy } = useForm();
     const { flash } = usePage().props;
     const settings = {
-        route: 'users',
-        model: 'User',
-        models: 'Users',
+        route: 'categories',
+        model: 'Category',
+        models: 'Categories',
         hasAdd: true,
         hasEdit: true,
         hasDelete: true,
     };
 
     const handleDelete = (id) => {
-        setUserToDelete(id);
+        setCategoryToDelete(id);
         setShowModal(true);
     };
 
     const confirmDelete = () => {
-        destroy(route(`admin.${settings.route}.destroy`, userToDelete), {
+        destroy(route(`admin.${settings.route}.destroy`, categoryToDelete), {
             preserveScroll: true,
         });
     };
@@ -36,7 +36,7 @@ export default function Index({ users }) {
 
     useEffect(() => {
         if (flash.success) {
-            setUserList(userList.filter(user => user.id !== userToDelete));
+            setCategoryList(categoryList.filter(category => category.id !== categoryToDelete));
         }
 
         if (flash.success || flash.error) {
@@ -57,33 +57,29 @@ export default function Index({ users }) {
                         <tr>
                             <th className="px-4 py-2 border-b">ID</th>
                             <th className="px-4 py-2 border-b">Name</th>
-                            <th className="px-4 py-2 border-b">Email</th>
-                            <th className="px-4 py-2 border-b">Member Since</th>
                             <th className="px-4 py-2 border-b">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {userList.map(user => (
-                            <tr key={user.id} className="border-t">
-                                <td className="px-4 py-2">{user.id}</td>
-                                <td className="px-4 py-2">{user.name}</td>
-                                <td className="px-4 py-2">{user.email}</td>
-                                <td className="px-4 py-2">{user.joined_at}</td>
+                        {categoryList.map(category => (
+                            <tr key={category.id} className="border-t">
+                                <td className="px-4 py-2">{category.id}</td>
+                                <td className="px-4 py-2">{category.name}</td>
                                 <td className="px-4 py-2 flex gap-2">
                                     {settings.hasEdit && (
-                                        <Link href={route(`admin.${settings.route}.edit`, user.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
+                                        <Link href={route(`admin.${settings.route}.edit`, category.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">
                                             <Pencil size={14} /> Edit
                                         </Link>
                                     )}
                                     {settings.hasDelete && (
-                                        <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:underline flex items-center gap-1 text-xs">
+                                        <button onClick={() => handleDelete(category.id)} className="text-red-600 hover:underline flex items-center gap-1 text-xs">
                                             <Trash2 size={14} /> Delete
                                         </button>
                                     )}
                                 </td>
                             </tr>
                         ))}
-                        {userList.length === 0 && (
+                        {categoryList.length === 0 && (
                             <tr>
                                 <td colSpan="4" className="px-4 py-4 text-center text-gray-500">
                                     No {settings.model.charAt(0).toLowerCase() + settings.model.slice(1)} found.

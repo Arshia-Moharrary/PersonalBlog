@@ -28,8 +28,7 @@ export default function Create({ categories }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // post(route('admin.posts.create'), data);
-        console.log(data);
+        post(route('admin.posts.create'), data);
     };
 
     return (

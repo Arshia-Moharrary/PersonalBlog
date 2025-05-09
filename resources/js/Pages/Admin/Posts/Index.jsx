@@ -69,7 +69,7 @@ export default function Index({ posts }) {
                                 <td className="px-4 py-2">{post.id}</td>
                                 <td className="px-4 py-2">{post.title}</td>
                                 <td className="px-4 py-2">{post.category.name}</td>
-                                <td className="px-4 py-2">{post.author.name}</td>
+                                <td className="px-4 py-2">{post.user.name}</td>
                                 <td className="px-4 py-2 flex gap-2">
                                     {settings.hasEdit && (
                                         <Link href={route(`admin.${settings.route}.edit`, post.id)} as="button" className="text-blue-600 hover:underline flex items-center gap-1 text-xs">

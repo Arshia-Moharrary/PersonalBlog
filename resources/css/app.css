@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "@yaireo/tagify/dist/tagify.css";
 
 @theme {
     font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -16,4 +17,8 @@
 
 .btn-secondary {
     @apply hover:bg-primary text-center bg-transparent border-2 border-primary text-primary hover:text-white transition;
+}
+
+.editor .ql-container {
+    min-height: 200px;
 }

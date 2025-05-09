@@ -32,7 +32,6 @@ export default function Create() {
                         name="name"
                         value={data.name}
                         className="mt-1 block w-full"
-                        isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
                         placeholder="Enter user name"
                     />
@@ -49,7 +48,6 @@ export default function Create() {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                         placeholder="Enter user email"
                     />

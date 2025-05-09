@@ -11,7 +11,7 @@ export default function Sidebar() {
                 <Link href={route('admin.users.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.users.index') || route().current('admin.users.create') || route().current('admin.users.edit') ? 'text-primary' : ''}`}>
                     <Users size={18} /> Users
                 </Link>
-                <Link href={route('admin.categories.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.categories.index') /*|| route().current('admin.categories.create') || route().current('admin.categories.edit')*/ ? 'text-primary' : ''}`}>
+                <Link href={route('admin.categories.index')} className={`flex items-center gap-2 hover:text-primary transition ${route().current('admin.categories.index') || route().current('admin.categories.create')/* || route().current('admin.categories.edit')*/ ? 'text-primary' : ''}`}>
                     <Tags size={18} /> Categories
                 </Link>
                 <hr />

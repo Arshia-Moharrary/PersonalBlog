@@ -27,7 +27,7 @@ export default function Header({ auth, isAdmin }) {
                 </button>
 
                 <nav className="hidden sm:flex justify-center space-x-6 text-sm text-gray-600 mx-auto">
-                    <a href="" className="hover:text-primary transition">Home</a>
+                    <Link href={route('home')} className={`${route().current('home') ? 'text-primary' : ''} hover:text-primary transition`}>Home</Link>
                     <a href="" className="hover:text-primary transition">Blog</a>
                     <a href="" className="hover:text-primary transition">About</a>
                     <a href="" className="hover:text-primary transition">Contact</a>

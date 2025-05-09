@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->created_at->diffForHumans();
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

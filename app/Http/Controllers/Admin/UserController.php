@@ -69,17 +69,17 @@ class UserController extends Controller
     public function destroy(User $user, Request $request)
     {
         if ($user->id == $request->user()->id) {
-            return redirect()->back()->with('error', 'Sorry, you can\'t delete your own account while you\'re signed in.');
+            return back()->with('error', 'Sorry, you can\'t delete your own account while you\'re signed in.');
         }
 
         try {
             $user->delete();
 
-            return redirect()->back()->with('success', __('success.delete', [
+            return back()->with('success', __('success.delete', [
                 'attribute' => 'User'
             ]));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', __('error.delete', [
+            return back()->with('error', __('error.delete', [
                 'attribute' => 'user'
             ]));
         }

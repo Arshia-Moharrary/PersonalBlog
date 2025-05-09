@@ -4,24 +4,24 @@ import InputError from '@/Components/InputError';
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 
-export default function Edit({ user }) {
+export default function Edit({ category }) {
     const { data, setData, put, processing, errors } = useForm({
-        name: user.name,
-        email: user.email,
+        name: category.name,
+        email: category.email,
         password: '',
         password_confirmation: '',
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route('admin.users.update', user.id), data);
+        put(route('admin.categories.update', category.id), data);
     };
 
     return (
         <AdminLayout>
-            <Head title="Edit User" />
+            <Head title="Edit Category" />
 
-            <h1 className="text-2xl font-semibold mb-6">Add New User</h1>
+            <h1 className="text-2xl font-semibold mb-6">Add New Category</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mt-4">
                     <InputLabel htmlFor="name" value="Name" />
@@ -32,66 +32,16 @@ export default function Edit({ user }) {
                         name="name"
                         value={data.name}
                         className="mt-1 block w-full"
-                        isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
-                        placeholder="Enter user name"
+                        placeholder="Enter category name"
                     />
 
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                        placeholder="Enter user email"
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        onChange={(e) => setData('password', e.target.value)}
-                        placeholder="Enter user password"
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        placeholder="Confirm user password"
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
                 <div className="flex justify-end gap-4 mt-4">
                     <Link
-                        href={route('admin.users.index')}
+                        href={route('admin.categories.index')}
                         as="button"
                         className="btn-secondary px-4 py-2">
                         Cancel
